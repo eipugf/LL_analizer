@@ -1,54 +1,10 @@
 #pragma once
 /*	
 	»сходный модуль сканера лексем €зыка по варианту 22.
-	¬езде допили, браток, возвращение изображений лексем самих Єпта!
+	¬езде допили, браток, возвращение изображений лексем самих!
 */
-#define MaxText 10000
-#define MaxLex 257
-typedef char IM[MaxText];
-typedef char LEX[MaxLex];
 #include <string.h>
-
-//возвращаемые коды
-#define TIntConst 1
-#define TFloatConst 2
-#define TPlus 3
-#define TPluesPlus 4
-#define TMinus 5
-#define TMinusMinus 6
-#define	TAssigment 7
-#define TEqual 8
-#define TMoreOrEqual 9
-#define TLessOrEqual 10
-#define TNotEqual 11
-#define TMultiple 12
-#define TMod 13
-#define TDiv 14
-#define TIdentifier 15
-#define TSwitch 16
-#define TCase 17
-#define TBreak 18
-#define TMain 19
-#define TVoid 20
-#define TInt 21
-#define TFloat 22
-#define TFunctionMain 23
-#define TClass 24
-#define TNew 25
-#define TComma 26
-#define TPoint 27
-#define TOpenParen 28
-#define TCloseParen 29
-#define TColons 30
-#define TOpenSqBracket 31
-#define TCloseSqBracket 32
-#define TMore 33
-#define TLess 34
-#define TOpenBrace 35
-#define TCloseBrace 36
-
-#define TEnd	1000
-#define TError	2000
+#include "defines.h"
 
 class Scaner
 {
@@ -84,19 +40,19 @@ class Scaner
 			{
 			case '+':
 				this->incCurrentAndPos();
-				strcpy(lexema,"+");
+				strcpy_s(lexema,"+");
 				if(t[currentPosition]=='+'){
-					strcpy(lexema,"++");
+					strcpy_s(lexema,"++");
 					this->incCurrentAndPos();
 					tResult = TPluesPlus;
 				}
 				else tResult = TPlus;
 				break;
 			case '-':
-				strcpy(lexema,"-");
+				strcpy_s(lexema,"-");
 				this->incCurrentAndPos();
 				if(t[currentPosition]=='-'){
-					strcpy(lexema,"--");
+					strcpy_s(lexema,"--");
 					position++;
 					currentPosition++;
 					tResult = TMinusMinus;
@@ -104,10 +60,10 @@ class Scaner
 				else tResult = TMinus;
 				break;
 			case '=':
-				strcpy(lexema,"=");
+				strcpy_s(lexema,"=");
 				this->incCurrentAndPos();
 				if(t[currentPosition]=='='){
-					strcpy(lexema,"==");
+					strcpy_s(lexema,"==");
 					this->incCurrentAndPos();
 					tResult =  TEqual;
 				}
@@ -116,89 +72,94 @@ class Scaner
 			case '!':
 				this->incCurrentAndPos();
 				if(t[currentPosition]=='='){
-					strcpy(lexema,"!=");
+					strcpy_s(lexema,"!=");
 					this->incCurrentAndPos();
 					tResult =  TNotEqual;
 				}
 				else tResult =  TError;
 				break;
 			case '<':
-				strcpy(lexema,"<");
+				strcpy_s(lexema,"<");
 				this->incCurrentAndPos();
 				if(t[currentPosition]=='='){
-					strcpy(lexema,"<=");
+					strcpy_s(lexema,"<=");
 					this->incCurrentAndPos();
 					tResult =  TLessOrEqual;
 				}
 				else tResult =  TLess;
 				break;
 			case '>':
-				strcpy(lexema,">");
+				strcpy_s(lexema,">");
 				this->incCurrentAndPos();
 				if(t[currentPosition]=='='){
-					strcpy(lexema,">=");
+					strcpy_s(lexema,">=");
 					this->incCurrentAndPos();
 					tResult =  TLessOrEqual;
 				}
 				else tResult =  TMore;
 				break;
 			case '*':
-				strcpy(lexema,"*");
+				strcpy_s(lexema,"*");
 				this->incCurrentAndPos();
 				tResult =  TMultiple;
 				break;
 			case '%':
-				strcpy(lexema,"%");
+				strcpy_s(lexema,"%");
 				this->incCurrentAndPos();
 				tResult =  TMod;
 				break;
 			case '[':
-				strcpy(lexema,"[");
+				strcpy_s(lexema,"[");
 				this->incCurrentAndPos();
 				tResult =  TOpenSqBracket;
 				break;
 			case ']':
-				strcpy(lexema,"]");
+				strcpy_s(lexema,"]");
 				this->incCurrentAndPos();
 				tResult =  TCloseSqBracket;
 				break;
 			case '{':
-				strcpy(lexema,"{");
+				strcpy_s(lexema,"{");
 				this->incCurrentAndPos();
 				tResult =  TOpenBrace;
 				break;
 			case '}':
-				strcpy(lexema,"}");
+				strcpy_s(lexema,"}");
 				this->incCurrentAndPos();
 				tResult =  TCloseBrace;
 				break;
 			case '(':
-				strcpy(lexema,"(");
+				strcpy_s(lexema,"(");
 				this->incCurrentAndPos();
 				tResult =  TOpenParen;
 				break;
 			case ')':
-				strcpy(lexema,")");
+				strcpy_s(lexema,")");
 				this->incCurrentAndPos();
 				tResult =  TCloseParen;
 				break;
 			case '.':
-				strcpy(lexema,".");
+				strcpy_s(lexema,".");
 				this->incCurrentAndPos();
 				tResult =  TPoint;
 				break;
-			case ';':
-				strcpy(lexema,";");
+			case ',':
+				strcpy_s(lexema, ",");
 				this->incCurrentAndPos();
-				tResult =  TComma;
+				tResult = TComma;
+				break;
+			case ';':
+				strcpy_s(lexema,";");
+				this->incCurrentAndPos();
+				tResult =  TSemicolons;
 				break;
 			case ':':
-				strcpy(lexema,":");
+				strcpy_s(lexema,":");
 				this->incCurrentAndPos();
 				tResult =  TColons;
 				break;
 			case '\0':
-				strcpy(lexema,"\0");
+				strcpy_s(lexema,"\0");
 				tResult =  TEnd;
 				break;
 			case '\n':
@@ -207,7 +168,7 @@ class Scaner
 				position=0;
 				break;
 			case '/':
-			    strcpy(lexema,"/");
+			    strcpy_s(lexema,"/");
 				this->incCurrentAndPos();
 				if(t[currentPosition]=='/')
 				{
@@ -289,7 +250,7 @@ class Scaner
 									tResult = TFloatConst;
 								}
 							}
-							else tResult = TInt;
+							else tResult = TIntConst;
 							lexema[index] = '\0';
 						}
 						else if(LetterBig || LetterSmall)
@@ -343,8 +304,10 @@ class Scaner
 					 return  TFunctionMain;
 				 if(!strcmp(identifaer,"class"))
 					 return  TClass;
-				 if(!strcmp(identifaer,"new"))
-					 return  TNew;
+				 if (!strcmp(identifaer, "new"))
+					 return TNew;
+				 if (!strcmp(identifaer, "default"))
+					 return  TDefault;
 				 return TIdentifier;
 			 }
 
@@ -360,6 +323,22 @@ class Scaner
 		char *getLexem()
 		{
 			return this->lexema;
+		}
+
+		int getCurrentPos(){
+			return this->currentPosition;
+		}
+
+		void getData(int &curPos, int &line, int &pos){
+			curPos = currentPosition;
+			line = this->line;
+			pos = position;
+		}
+
+		void setData(int &curPos, int &line, int &pos){
+			currentPosition = curPos;
+			this->line = line;
+			this->position = position;
 		}
 };
 

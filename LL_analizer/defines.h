@@ -1,0 +1,81 @@
+#pragma once
+#define MaxText 10000
+#define MaxLex 257
+typedef char IM[MaxText];
+typedef char LEX[MaxLex];
+
+//коды терминалов
+#define TIntConst			1
+#define TFloatConst			2
+#define TPlus				3
+#define TPluesPlus			4
+#define TMinus				5
+#define TMinusMinus			6
+#define	TAssigment			7
+#define TEqual				8
+#define TMoreOrEqual		9
+#define TLessOrEqual		10
+#define TNotEqual			11
+#define TMultiple			12
+#define TMod				13
+#define TDiv				14
+#define TIdentifier			15
+#define TSwitch				16
+#define TCase				17
+#define TBreak				18
+#define TMain				19
+#define TVoid				20
+#define TInt				21
+#define TFloat				22
+#define TFunctionMain		23
+#define TClass				24
+#define TNew				25
+#define TComma				26
+#define TPoint				27
+#define TOpenParen			28
+#define TCloseParen			29
+#define TColons				30
+#define TOpenSqBracket		31
+#define TCloseSqBracket		32
+#define TMore				33
+#define TLess				34
+#define TOpenBrace			35
+#define TCloseBrace			36
+#define TDefault			37
+#define TSemicolons			38
+
+
+#define TEnd				1000
+#define TError				2000
+
+//коды нетерминалов
+#define TOper_programm			50
+#define TOper_class_descr		51
+#define TOper_var_descr			52
+#define TOper_type				53
+#define TOper_var_list			54
+#define TOper_right_list		55
+#define TOper_elem_list			56
+#define TOper_mass_size			57
+#define TOper_right_size_mass	58
+#define TOper_main_function		59
+#define TOper_composite_oper	60
+#define TOper_operator			61
+#define TOper_assigment			62
+#define TOper_operand			63
+#define TOper_right_operand		64
+#define TOper_appeal_to_mass	65
+#define TOper_switch			66
+#define TOper_case_block		67
+#define TOper_expr1				68
+#define TOper_expr11			69
+#define TOper_expr2				70
+#define TOper_expr22			71
+#define TOper_expr3				72
+#define TOper_expr33			73
+#define TOper_expr4				74
+#define TOper_expr44			75
+#define TOper_expr5				76
+#define TOper_expr6				77
+#define TOper_expr66			78
+#define TOper_expr7				79
